@@ -1,0 +1,63 @@
+import { Page, Locator } from '@playwright/test';
+
+/**
+ * Page Object Model for Search Results Page
+ * Handles search results page after performing a business search
+ */
+export class SearchResultsPage {
+  readonly page: Page;
+  
+  // Search results locators
+  readonly searchResultsContainer: Locator;
+  readonly businessResults: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    
+    // Search results container - using the business-search div
+    // DOM Path: section.container container-main > div#business-search
+    this.searchResultsContainer = page.locator('#business-search');
+    
+    // Business results - individual business items in search results
+    // DOM Path: section.container container-main > div#business-search > div.row > div.col-md-9 > ul.business-search
+    // HTML: <ul class="business-search">
+    // This is the main search results list (not "Customer preferred businesses" section)
+    // Use the full path to ensure we get the correct list
+    const mainResultsList = page.locator('#business-search div.col-md-9 ul.business-search').first();
+    this.businessResults = mainResultsList.locator('li').filter({ has: page.locator('h3') });
+  }
+
+  /**
+   * Wait for the search results page to load
+   */
+  async waitForPageLoad(): Promise<void> {
+    // Wait for URL to contain search-related path
+    await this.page.waitForURL(/.*search.*/i, { timeout: 10000 }).catch(() => {
+      // URL might not contain "search", continue anyway
+    });
+    
+    // Wait for results container to be visible
+    await this.searchResultsContainer.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {
+      // Results might load differently, continue anyway
+    });
+  }
+
+  /**
+   * Get all business result items
+   * Returns locator for all business results on the page
+   */
+  getAllBusinessResults(): Locator {
+    return this.businessResults;
+  }
+
+  /**
+   * Get business name from a result item
+   * Returns locator for business name within a result item
+   * Based on page structure: heading level 3 contains the business name with a link inside
+   * From error context: heading "Greenice 0307" [level=3] contains link "Greenice 0307"
+   */
+  getBusinessName(resultItem: Locator): Locator {
+    // Business name is in h3 > a link
+    return resultItem.locator('h3 a, h3').first();
+  }
+}
