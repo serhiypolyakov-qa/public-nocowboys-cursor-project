@@ -21,7 +21,7 @@ export class HomePage {
    * Navigate to the home page
    */
   async goto(): Promise<void> {
-    await this.page.goto('https://staging.nocowboys.co.nz');
+    await this.page.goto('/');
   }
 
   /**

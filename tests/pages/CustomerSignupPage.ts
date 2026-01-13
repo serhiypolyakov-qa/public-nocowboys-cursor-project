@@ -54,7 +54,7 @@ export class CustomerSignupPage {
    * Navigate to the signup page
    */
   async goto(): Promise<void> {
-    await this.page.goto('https://staging.nocowboys.co.nz/customers/register');
+    await this.page.goto('/customers/register');
   }
 
   /**
