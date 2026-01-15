@@ -24,12 +24,18 @@ export class CustomerSignupPage {
   
   // Validation checkmark locators (green checkmarks)
   readonly validationCheckmarks: Locator;
+  
+  // Business Account link locator
+  readonly businessAccountLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
     
     // Form
     this.form = page.locator('#register-customer-form');
+    
+    // Business Account link - using role-based selector with text from HTML: <a href="/register/business">Business Account.</a>
+    this.businessAccountLink = page.getByRole('link', { name: 'Business Account.' });
     
     // Input fields - using stable ID selectors from HTML
     this.firstNameInput = page.locator('#FirstName');
@@ -55,6 +61,13 @@ export class CustomerSignupPage {
    */
   async goto(): Promise<void> {
     await this.page.goto('/customers/register');
+  }
+
+  /**
+   * Click the Business Account link
+   */
+  async clickBusinessAccount(): Promise<void> {
+    await this.businessAccountLink.click();
   }
 
   /**
