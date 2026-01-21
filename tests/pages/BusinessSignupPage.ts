@@ -274,8 +274,13 @@ export class BusinessSignupPage {
       }
     }
     
-    // Click the confirm button
-    await this.confirmButton.click({ force: !isEnabled });
+    // Click the confirm button and wait for navigation
+    await Promise.all([
+      this.page.waitForURL(/.*\/register\/business-account-created/, { timeout: 30000 }).catch(() => {
+        // If URL doesn't change, continue anyway
+      }),
+      this.confirmButton.click({ force: !isEnabled })
+    ]);
   }
 
   /**

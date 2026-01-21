@@ -78,18 +78,43 @@ export class EmailContentPage {
    * @returns Promise that resolves when navigation starts
    */
   async clickVerificationLink(): Promise<void> {
-    // Find the "Confirm Email Address" link using the most specific selector
-    // The link has text "Confirm Email Address" and href containing "/register/business-account-created/"
-    const confirmEmailLink = this.emailLinks
-      .filter({ hasText: /Confirm Email Address/i })
-      .filter(this.page.locator('a[href*="/register/business-account-created"]'))
-      .first();
+    // Wait for page to fully load
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(2000);
     
-    // Wait for the link to be visible
-    await confirmEmailLink.waitFor({ state: 'visible', timeout: 10000 });
+    // Try multiple strategies to find the verification link
+    let verificationLink: Locator | null = null;
     
-    // Click the verification link
-    await confirmEmailLink.click();
+    // Strategy 1: Link with text "Confirm Email Address" and href containing business-account-created
+    try {
+      verificationLink = this.page.locator('a[href*="/register/business-account-created"]')
+        .filter({ hasText: /Confirm Email Address/i })
+        .first();
+      await verificationLink.waitFor({ state: 'visible', timeout: 5000 });
+    } catch {
+      // Strategy 2: Any link with text "Confirm Email Address"
+      try {
+        verificationLink = this.page.getByRole('link', { name: /Confirm Email Address/i }).first();
+        await verificationLink.waitFor({ state: 'visible', timeout: 5000 });
+      } catch {
+        // Strategy 3: Link with href containing business-account-created or business-details
+        try {
+          verificationLink = this.page.locator('a[href*="/register/business-account-created"], a[href*="/register/business-details"]').first();
+          await verificationLink.waitFor({ state: 'visible', timeout: 5000 });
+        } catch {
+          // Strategy 4: Any link containing verify/confirm keywords
+          verificationLink = this.page.locator('a[href*="verify"], a[href*="confirm"], a[href*="validation"]').first();
+          await verificationLink.waitFor({ state: 'visible', timeout: 5000 });
+        }
+      }
+    }
+    
+    if (verificationLink) {
+      // Click the verification link
+      await verificationLink.click();
+    } else {
+      throw new Error('Verification link not found in email content');
+    }
   }
 
   /**

@@ -53,6 +53,8 @@ export class QuestionnaireModal {
    * Select "Yes, I am committed to asking for and obtaining reviews." radio button
    */
   async selectReviewsYes(): Promise<void> {
+    await this.reviewsYesRadio.waitFor({ state: 'visible', timeout: 10000 });
+    await this.page.waitForTimeout(500); // Wait for element to be stable
     await this.reviewsYesRadio.check();
   }
 
@@ -60,6 +62,8 @@ export class QuestionnaireModal {
    * Select "Yes, I understand and support this approach." radio button
    */
   async selectReputationYes(): Promise<void> {
+    await this.reputationYesRadio.waitFor({ state: 'visible', timeout: 10000 });
+    await this.page.waitForTimeout(500); // Wait for element to be stable
     await this.reputationYesRadio.check();
   }
 
@@ -67,6 +71,8 @@ export class QuestionnaireModal {
    * Select "Yes, I hold a valid license where required." radio button
    */
   async selectLicensingYes(): Promise<void> {
+    await this.licensingYesRadio.waitFor({ state: 'visible', timeout: 10000 });
+    await this.page.waitForTimeout(500); // Wait for element to be stable
     await this.licensingYesRadio.check();
   }
 
