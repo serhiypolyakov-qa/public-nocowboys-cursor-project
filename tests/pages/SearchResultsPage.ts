@@ -10,6 +10,7 @@ export class SearchResultsPage {
   // Search results locators
   readonly searchResultsContainer: Locator;
   readonly businessResults: Locator;
+  readonly searchInput: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -17,6 +18,11 @@ export class SearchResultsPage {
     // Search results container - using the business-search div
     // DOM Path: section.container container-main > div#business-search
     this.searchResultsContainer = page.locator('#business-search');
+    
+    // Search input field on results page
+    // DOM Path: section.container container-main > div#business-search > div.search-filter-business-name > div#search-filter > form.search-for-business-name-form > div.input-group > input.form-control
+    // HTML: <input type="text" class="form-control" placeholder="Type the business name here" name="searchString" value="greenice web development" maxlength="255">
+    this.searchInput = page.locator('input[name="searchString"]');
     
     // Business results - individual business items in search results
     // DOM Path: section.container container-main > div#business-search > div.row > div.col-md-9 > ul.business-search
@@ -31,15 +37,34 @@ export class SearchResultsPage {
    * Wait for the search results page to load
    */
   async waitForPageLoad(): Promise<void> {
-    // Wait for URL to contain search-related path
-    await this.page.waitForURL(/.*search.*/i, { timeout: 10000 }).catch(() => {
-      // URL might not contain "search", continue anyway
+    // Wait for URL to contain search-business path
+    await this.page.waitForURL(/.*\/search-business\/.*/i, { timeout: 10000 }).catch(() => {
+      // URL might not contain "search-business", continue anyway
     });
     
     // Wait for results container to be visible
     await this.searchResultsContainer.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {
       // Results might load differently, continue anyway
     });
+  }
+
+  /**
+   * Get the search input value
+   */
+  async getSearchInputValue(): Promise<string | null> {
+    return await this.searchInput.inputValue();
+  }
+
+  /**
+   * Check if search input is visible
+   */
+  async isSearchInputVisible(): Promise<boolean> {
+    try {
+      await this.searchInput.waitFor({ state: 'visible', timeout: 5000 });
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   /**
@@ -59,5 +84,12 @@ export class SearchResultsPage {
   getBusinessName(resultItem: Locator): Locator {
     // Business name is in h3 > a link
     return resultItem.locator('h3 a, h3').first();
+  }
+
+  /**
+   * Get business name text from a result item
+   */
+  async getBusinessNameText(resultItem: Locator): Promise<string | null> {
+    return await this.getBusinessName(resultItem).textContent();
   }
 }

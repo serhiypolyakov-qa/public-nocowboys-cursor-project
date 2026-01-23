@@ -13,7 +13,7 @@ import { BusinessDetailsPage } from '../pages/BusinessDetailsPage';
  * Manual Test Case: BusinessRegistrationTest
  * 
  * Test Steps:
- * 1. Navigate to https://staging.nocowboys.co.nz (with base Authorization: username: 'nocowboys', password: 'PWAOUR4')
+ * 1. Перейди на https://staging.nocowboys.co.nz (for base Authorization use HTTP_AUTH_USERNAME and HTTP_AUTH_PASSWORD from .env)
  * 2. Click Login button on Home page
  * 3. Click Sign up link on Login page
  * 4. Click Business Account link

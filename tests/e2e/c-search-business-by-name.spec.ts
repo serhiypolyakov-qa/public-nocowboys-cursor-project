@@ -8,7 +8,7 @@ import { SearchResultsPage } from '../pages/SearchResultsPage';
  * Manual Test Case: SearchBusinessByNameTest
  * 
  * Test Steps:
- * 1. Open https://staging.nocowboys.co.nz (with base Authorization: username: 'nocowboys', password: 'PWAOUR4')
+ * 1. Перейди на https://staging.nocowboys.co.nz (for base Authorization use HTTP_AUTH_USERNAME and HTTP_AUTH_PASSWORD from .env)
  * 2. Click on 'Search Business by name' button
  * 3. On search field enter 'Greenice'
  * 4. After a short pause, verify that all results in dropdown contain the search query "Greenice"
