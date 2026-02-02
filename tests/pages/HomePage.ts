@@ -15,11 +15,22 @@ export class HomePage {
   readonly searchInput: Locator;
   readonly searchDropdownResults: Locator;
 
+  // Logo - for navigating back to home
+  readonly logoLink: Locator;
+
+  // Find a business (hero) locators
+  readonly findABusinessBox: Locator;
+  readonly findBusinessPanel: Locator;
+  readonly categorySelectizeInput: Locator;
+  readonly locationSelectizeInput: Locator;
+  readonly findTopMatchesButton: Locator;
+  readonly selectizeDropdownOption: Locator;
+
   constructor(page: Page) {
     this.page = page;
     
-    // Login button - using role-based selector with text from HTML: <a href="/login"><span class="navbar-login-item">Log In</span></a>
-    this.loginButton = page.getByRole('link', { name: 'Log In' });
+    // Login button – prompt: <span class="navbar-login-item">Log In</span> inside <a href="/login">
+    this.loginButton = page.locator('a[href="/login"]').filter({ has: page.locator('.navbar-login-item') }).first().or(page.getByRole('link', { name: 'Log In' }));
     
     // Search button - using ID selector from provided HTML: <a id="header-search-container-open" href="#" class="search-open-icon fa fa-search">
     this.searchButton = page.locator('#header-search-container-open');
@@ -32,6 +43,22 @@ export class HomePage {
     // Search dropdown results - appears after typing in search field
     // Common patterns: .search-results, .dropdown-menu, .autocomplete-results, [class*="search-result"], etc.
     this.searchDropdownResults = page.locator('.search-results, .dropdown-menu, .autocomplete-results, [class*="search-result"], [class*="autocomplete"], ul[role="listbox"]').first();
+
+    // Logo - link to home page, typically in navbar
+    this.logoLink = page.locator('header a[href="/"], .navbar-brand[href="/"], a.navbar-brand').first();
+
+    // "Find a business" – кнопка; після кліку з'являються поля категорії та локації
+    this.findABusinessBox = page.locator('#hero-choice-find');
+    // Блок з полями вводу (з'являється після кліку на кнопку "Find a business")
+    this.findBusinessPanel = page.locator('#find-business-panel');
+    // Поле категорії "Help me find"
+    this.categorySelectizeInput = page.locator('#find-business-panel form#HomepageCategoryLocation .selectize-control.categoryIdSelectize .selectize-input input, #find-business-panel form#HomepageCategoryLocation input[placeholder="Just start typing..."]').first();
+    // Поле локації "in or around"
+    this.locationSelectizeInput = page.locator('#find-business-panel form#HomepageCategoryLocation .selectize-control.areaIdSelectize .selectize-input input').first();
+    // Кнопка "Find Top Matches" – стає клікабельною після введення категорії та локації
+    this.findTopMatchesButton = page.locator('#areaCategorySubmit');
+    // Selectize dropdown options (rendered at body or within panel)
+    this.selectizeDropdownOption = page.locator('.selectize-dropdown .option, .selectize-dropdown [data-selectable]');
   }
 
   /**
@@ -84,5 +111,61 @@ export class HomePage {
     await this.searchDropdownResults.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {
       // Dropdown might not appear, continue anyway
     });
+  }
+
+  /**
+   * Click the logo to navigate to home page
+   */
+  async clickLogo(): Promise<void> {
+    await this.logoLink.click();
+  }
+
+  /**
+   * Клікнути кнопку "Find a business". Після кліку з'являються поля вводу категорії та локації.
+   */
+  async clickFindABusiness(): Promise<void> {
+    await this.findABusinessBox.scrollIntoViewIfNeeded();
+    await this.findABusinessBox.click();
+  }
+
+  /**
+   * Дочекатися появу полів категорії та локації після кліку на "Find a business".
+   */
+  async waitForFindBusinessPanel(): Promise<void> {
+    await this.categorySelectizeInput.waitFor({ state: 'attached', timeout: 15000 });
+  }
+
+  /**
+   * Ввести категорію в поле "Help me find" (відкриває випадаючий список категорій).
+   */
+  async typeCategory(text: string): Promise<void> {
+    await this.categorySelectizeInput.click({ force: true });
+    await this.categorySelectizeInput.fill(text);
+  }
+
+  /**
+   * Click an option in the selectize dropdown by exact text (e.g. "Academic")
+   * Selectize dropdown may be positioned in a way Playwright considers "hidden"; use force click.
+   */
+  async selectSelectizeOption(optionText: string): Promise<void> {
+    const option = this.page.locator('.selectize-dropdown .option, .selectize-dropdown [data-selectable]').filter({ hasText: new RegExp(`^${optionText}$`, 'i') }).first();
+    await option.waitFor({ state: 'attached', timeout: 5000 });
+    await option.click({ force: true });
+  }
+
+  /**
+   * Ввести локацію в поле "in or around" (відкриває випадаючий список локацій).
+   */
+  async typeLocation(text: string): Promise<void> {
+    await this.locationSelectizeInput.click({ force: true });
+    await this.locationSelectizeInput.fill(text);
+  }
+
+  /**
+   * Клікнути кнопку "Find Top Matches" (активна після заповнення категорії та локації).
+   * Відкривається сторінка пошуку бізнесів по категорії та локації.
+   */
+  async clickFindTopMatches(): Promise<void> {
+    await this.findTopMatchesButton.click();
   }
 }

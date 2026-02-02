@@ -1,34 +1,31 @@
 import { Page, Locator } from '@playwright/test';
 
 /**
- * Page Object Model for Search Results Page
- * Handles search results page after performing a business search
+ * Page Object Model for Search Results Page (search by business name)
+ *
+ * This page is used when searching by business name (e.g. header search or Dandruff).
+ * URL pattern: /search-business/:query
+ *
+ * For search by category and location (URL /search/:area/:category), use CategoryLocationSearchResultsPage.
  */
 export class SearchResultsPage {
   readonly page: Page;
-  
-  // Search results locators
+
+  // Search results locators (search by name page)
   readonly searchResultsContainer: Locator;
   readonly businessResults: Locator;
   readonly searchInput: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    
+
     // Search results container - using the business-search div
-    // DOM Path: section.container container-main > div#business-search
     this.searchResultsContainer = page.locator('#business-search');
-    
-    // Search input field on results page
-    // DOM Path: section.container container-main > div#business-search > div.search-filter-business-name > div#search-filter > form.search-for-business-name-form > div.input-group > input.form-control
-    // HTML: <input type="text" class="form-control" placeholder="Type the business name here" name="searchString" value="greenice web development" maxlength="255">
+
+    // Search input field on "search by name" results page
     this.searchInput = page.locator('input[name="searchString"]');
-    
-    // Business results - individual business items in search results
-    // DOM Path: section.container container-main > div#business-search > div.row > div.col-md-9 > ul.business-search
-    // HTML: <ul class="business-search">
-    // This is the main search results list (not "Customer preferred businesses" section)
-    // Use the full path to ensure we get the correct list
+
+    // Business results list on "search by name" page
     const mainResultsList = page.locator('#business-search div.col-md-9 ul.business-search').first();
     this.businessResults = mainResultsList.locator('li').filter({ has: page.locator('h3') });
   }
