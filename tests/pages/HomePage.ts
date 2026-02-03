@@ -26,6 +26,12 @@ export class HomePage {
   readonly findTopMatchesButton: Locator;
   readonly selectizeDropdownOption: Locator;
 
+  // Review a business (hero) locators
+  readonly reviewABusinessBox: Locator;
+  readonly reviewBusinessPanel: Locator;
+  readonly reviewBusinessSearchInput: Locator;
+  readonly reviewBusinessAutocompleteResults: Locator;
+
   constructor(page: Page) {
     this.page = page;
     
@@ -59,13 +65,31 @@ export class HomePage {
     this.findTopMatchesButton = page.locator('#areaCategorySubmit');
     // Selectize dropdown options (rendered at body or within panel)
     this.selectizeDropdownOption = page.locator('.selectize-dropdown .option, .selectize-dropdown [data-selectable]');
+
+    // "Review a business" – кнопка; після кліку з'являється поле пошуку бізнесів по назві
+    // DOM Path: section#homepage-hero-search-container > div.container container-homepage-top > div#hero-choice-container > div#hero-choice-review
+    // HTML Element: <div class="hero-choice-box" id="hero-choice-review" data-target="review-business-panel">
+    this.reviewABusinessBox = page.locator('#hero-choice-review');
+    // Блок з полем пошуку (з'являється після кліку на кнопку "Review a business")
+    // DOM Path: section#homepage-hero-search-container > div.container container-homepage-top > div#review-business-panel
+    this.reviewBusinessPanel = page.locator('#review-business-panel');
+    // Поле пошуку бізнесів по назві
+    // DOM Path: section#homepage-hero-search-container > div.container container-homepage-top > div#review-business-panel > div.homepage-.earch-bar review-bu.ine.-.earch > form#ReviewBusinessSearchForm > div.form-group review-.earch-group > input#review-business-search-input
+    // HTML Element: <input type="text" id="review-business-search-input" name="searchstring" class="form-control" placeholder="Type the business name here" autocomplete="off" maxlength="255">
+    this.reviewBusinessSearchInput = page.locator('#review-business-search-input');
+    // Випадаючий список результатів автодоповнення
+    // DOM Path: section#homepage-hero-search-container > div.container container-homepage-top > div#review-business-panel > div.homepage-.earch-bar review-bu.ine.-.earch > form#ReviewBusinessSearchForm > div#review-business-autocomplete-results > div.autocomplete-item
+    this.reviewBusinessAutocompleteResults = page.locator('#review-business-autocomplete-results .autocomplete-item');
   }
 
   /**
    * Navigate to the home page
    */
   async goto(): Promise<void> {
-    await this.page.goto('/');
+    await this.page.goto('/', { 
+      waitUntil: 'domcontentloaded',
+      timeout: 60000 
+    });
   }
 
   /**
@@ -167,5 +191,48 @@ export class HomePage {
    */
   async clickFindTopMatches(): Promise<void> {
     await this.findTopMatchesButton.click();
+  }
+
+  /**
+   * Клікнути кнопку "Review a business". Після кліку з'являється поле пошуку бізнесів по назві.
+   */
+  async clickReviewABusiness(): Promise<void> {
+    await this.reviewABusinessBox.scrollIntoViewIfNeeded();
+    await this.reviewABusinessBox.click();
+  }
+
+  /**
+   * Дочекатися появи поля пошуку бізнесів після кліку на "Review a business".
+   */
+  async waitForReviewBusinessPanel(): Promise<void> {
+    await this.reviewBusinessSearchInput.waitFor({ state: 'attached', timeout: 15000 });
+  }
+
+  /**
+   * Ввести назву бізнесу в поле пошуку "Review a business" (відкриває випадаючий список результатів).
+   */
+  async typeReviewBusinessSearch(businessName: string): Promise<void> {
+    await this.reviewBusinessSearchInput.click({ force: true });
+    await this.reviewBusinessSearchInput.fill(businessName);
+  }
+
+  /**
+   * Дочекатися появи випадаючого списку результатів автодоповнення.
+   */
+  async waitForReviewBusinessAutocompleteResults(): Promise<void> {
+    await this.reviewBusinessAutocompleteResults.first().waitFor({ state: 'attached', timeout: 8000 });
+  }
+
+  /**
+   * Клікнути на результат автодоповнення за назвою бізнесу.
+   * Використовується селектор span.business-name для знаходження назви бізнесу в результаті.
+   * DOM Path: div.autocomplete-item > span.business-name
+   */
+  async clickReviewBusinessAutocompleteResult(businessName: string): Promise<void> {
+    const businessNameSpan = this.reviewBusinessAutocompleteResults
+      .locator('span.business-name', { hasText: businessName })
+      .first();
+    await businessNameSpan.waitFor({ state: 'attached', timeout: 5000 });
+    await businessNameSpan.click({ force: true });
   }
 }
