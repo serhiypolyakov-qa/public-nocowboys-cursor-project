@@ -1,8 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { LoginPage } from '../pages/LoginPage';
 import { CustomerSignupPage } from '../pages/CustomerSignupPage';
 import { VerificationRequiredPage } from '../pages/VerificationRequiredPage';
+import { EmailLogsPage } from '../pages/EmailLogsPage';
+import { EmailVerificationPage } from '../pages/EmailVerificationPage';
 
 /**
  * С
@@ -24,6 +26,12 @@ import { VerificationRequiredPage } from '../pages/VerificationRequiredPage';
  * 12. Click on Submit button
  * 13. Check that the SuccessMessagePage is displayed with "/customers/register/verification-required" in URL 
  *     and the message "Account Successfully Created" is displayed
+ * 14. Перейти на сторінку https://staging.nocowboys.co.nz/new/development/email-log 
+ * 15. Клікнути на лінк листа імейлу, який містить у назві "validate-your-email.html" та фрагмент імейлу, який вказували на кроці 6
+ * 16. Перевірити, що у новій вкладці відкрився лист верифікації імейлу
+ * 17. Клікнути на лінк активації у листі
+ * 18. Переконатись, що відкрилась сторінка /customers/register/verify-email/uniqueCode/
+ * 19. Переконатись, що на сторінці відображається "Sign-up complete. Welcome to NoCowboys."
  */
 test.describe('Customer Registration', () => {
   test('CustomerRegistrationTest - should successfully create customer account', async ({ page }) => {
@@ -91,5 +99,75 @@ test.describe('Customer Registration', () => {
     // Assert - Step 13: Expected Result 1: Verify page URL contains "/customers/register/verification-required"
     // URL may have ID at the end like /verification-required/108143
     await expect(page).toHaveURL(/.*\/customers\/register\/verification-required/);
+
+    // Act - Step 14: Navigate to email logs page
+    const emailLogsPage = new EmailLogsPage(page);
+    await emailLogsPage.goto();
+    await emailLogsPage.waitForPageLoad();
+
+    // Extract email fragment (part before @) for searching email in logs
+    // Email format: serhiy.polyakov+coursor123456789012345@greenice.net
+    // Fragment: serhiy.polyakov+coursor123456789012345
+    const emailFragment = testData.email.split('@')[0];
+
+    // Act - Step 15: Click on email link that contains "validate-your-email.html" and email fragment
+    // This opens email in a new tab
+    const emailPage = await emailLogsPage.clickEmailWithSubjectAndFragment('validate-your-email', emailFragment);
+
+    // Assert - Step 16: Verify that email verification page is opened in new tab
+    await emailPage.waitForLoadState('domcontentloaded');
+    // Verify that email content is loaded (check for email body structure)
+    const emailBody = emailPage.locator('table#bodyTable');
+    await expect(emailBody).toBeVisible({ timeout: 10000 });
+
+    // Act - Step 17: Click on verification link in the email content
+    // Create EmailVerificationPage for the email page to find and click verification link
+    const emailVerificationPage = new EmailVerificationPage(emailPage);
+    await emailVerificationPage.clickVerificationLink();
+
+    // Wait for navigation to verification page (might navigate in same tab or open new tab)
+    // Set up listeners for both scenarios
+    const newPagePromise = page.context().waitForEvent('page', { timeout: 5000 }).catch(() => null);
+    const emailPageNavigationPromise = emailPage.waitForURL(/.*\/customers\/register\/verify-email\/uniqueCode\//, { timeout: 10000 }).catch(() => null);
+
+    // Wait for either a new page to open or navigation in the email page
+    const [newPage, emailNavigated] = await Promise.all([
+      newPagePromise,
+      emailPageNavigationPromise
+    ]);
+
+    // Determine which page has the verification result
+    let verificationResultPage: Page;
+    if (newPage) {
+      // New page was opened
+      verificationResultPage = newPage;
+      await newPage.waitForLoadState('domcontentloaded');
+      // Close the email page
+      await emailPage.close();
+    } else if (emailNavigated !== null) {
+      // Navigation happened in email page
+      verificationResultPage = emailPage;
+    } else {
+      // Fallback: check if original page navigated (unlikely but possible)
+      try {
+        await page.waitForURL(/.*\/customers\/register\/verify-email\/uniqueCode\//, { timeout: 5000 });
+        verificationResultPage = page;
+        await emailPage.close();
+      } catch {
+        // If nothing happened, assume navigation is in email page
+        verificationResultPage = emailPage;
+      }
+    }
+
+    // Create EmailVerificationPage for the target page to verify success message
+    const verificationResultPageObj = new EmailVerificationPage(verificationResultPage);
+
+    // Assert - Step 18: Verify that verification page is displayed with URL containing "/customers/register/verify-email/uniqueCode/"
+    await expect(verificationResultPage).toHaveURL(/.*\/customers\/register\/verify-email\/uniqueCode\//);
+
+    // Assert - Step 19: Verify that "Sign-up complete. Welcome to NoCowboys." message is displayed
+    await verificationResultPageObj.waitForPageLoad();
+    await expect(verificationResultPageObj.successMessage).toBeVisible();
+    await expect(verificationResultPageObj.successMessage).toHaveText('Sign-up complete. Welcome to NoCowboys.');
   });
 });
