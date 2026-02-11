@@ -163,6 +163,13 @@ export class CustomerAccountPage {
   }
 
   /**
+   * Click "Post a new job" button (navigates to post job form)
+   */
+  async clickPostNewJob(): Promise<void> {
+    await this.postNewJobButton.click();
+  }
+
+  /**
    * Click on Jobs tab (default tab)
    */
   async clickJobsTab(): Promise<void> {
