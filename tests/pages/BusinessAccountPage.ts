@@ -230,4 +230,12 @@ export class BusinessAccountPage {
     }
     return texts;
   }
+
+  /**
+   * Click on a specific Jobs sub-tab by text (e.g. "Open", "Watchlist", etc.)
+   */
+  async clickJobsSubTab(subTabText: string): Promise<void> {
+    const subTab = this.jobsSubTabs.filter({ hasText: new RegExp(subTabText, 'i') }).first();
+    await subTab.click();
+  }
 }
