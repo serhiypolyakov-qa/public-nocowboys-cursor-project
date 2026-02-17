@@ -28,6 +28,10 @@ export class CustomerAccountPage {
   readonly dandruffSearchButton: Locator;
   readonly searchInput: Locator;
   readonly searchDropdownResults: Locator;
+  
+  // User menu in header locators
+  readonly userNameInHeader: Locator;
+  readonly logoutLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -71,6 +75,20 @@ export class CustomerAccountPage {
     
     // Search dropdown results: <li class="autocomplete-result autocomplete-result-business-name autocomplete-result-business-name-business ui-menu-item">
     this.searchDropdownResults = page.locator('li.autocomplete-result');
+    
+    // User name in header: <strong class="user-title">Bruno F.</strong>
+    // DOM Path: div.main-content > header > nav.navbar navbar-default > div.container-fluid container-navbar > div#mobile-menu > ul.nav navbar-nav > li.user-menu-item dropdown > a.hidden-x > strong.user-title
+    this.userNameInHeader = page.locator('header nav.navbar strong.user-title').or(
+      page.locator('li.user-menu-item strong.user-title')
+    ).first();
+    
+    // Log out link in dropdown menu
+    // DOM Path: div.main-content > header > nav.navbar navbar-default > div.container-fluid container-navbar > div#mobile-menu > ul.nav navbar-nav > li.user-menu-item dropdown > ul.dropdown-menu > li[0] > a
+    // Try to find by text "Log out" or "Logout" in dropdown menu
+    const userMenuDropdown = page.locator('li.user-menu-item ul.dropdown-menu');
+    this.logoutLink = userMenuDropdown.locator('a').filter({ hasText: /Log out/i }).or(
+      page.getByRole('link', { name: /Log out/i })
+    ).first();
   }
 
   /**
@@ -239,6 +257,29 @@ export class CustomerAccountPage {
   async clickBlacklistedBusinessesTab(): Promise<void> {
     await this.blacklistedBusinessesTab.click();
     await this.page.waitForURL(/.*\/customers\/account\/blacklist-businesses/, { timeout: 10000 });
+  }
+
+  /**
+   * Hover over customer name in header to open Personal Profile menu
+   */
+  async hoverOverUserNameInHeader(): Promise<void> {
+    await this.userNameInHeader.waitFor({ state: 'visible', timeout: 10000 });
+    await this.userNameInHeader.hover();
+    // Wait for dropdown menu to appear
+    const dropdownMenu = this.page.locator('li.user-menu-item ul.dropdown-menu');
+    await dropdownMenu.waitFor({ state: 'visible', timeout: 5000 });
+  }
+
+  /**
+   * Click on Log out link in Personal Profile dropdown menu
+   */
+  async clickLogout(): Promise<void> {
+    // Ensure dropdown is open by hovering first if needed
+    await this.logoutLink.waitFor({ state: 'visible', timeout: 10000 });
+    await Promise.all([
+      this.page.waitForURL(/.*\/login/, { timeout: 15000 }),
+      this.logoutLink.click(),
+    ]);
   }
 
 }
