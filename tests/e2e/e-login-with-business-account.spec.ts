@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { LoginPage } from '../pages/LoginPage';
-import { BusinessAccountPage } from '../pages/BusinessAccountPage';
+import { BusinessDashboardPage } from '../pages/BusinessDashboardPage';
 
 /**
  * Login with Business Account Test
@@ -25,7 +25,7 @@ test.describe('Login with Business Account', () => {
     // Arrange
     const homePage = new HomePage(page);
     const loginPage = new LoginPage(page);
-    const businessAccountPage = new BusinessAccountPage(page);
+    const dashboardPage = new BusinessDashboardPage(page);
     
     // Get credentials from environment variables
     const businessEmail = process.env.BUSINESS_LOGIN_TEST_LOGIN;
@@ -58,19 +58,19 @@ test.describe('Login with Business Account', () => {
       loginPage.clickLoginSubmit()
     ]);
 
-    // Act - Step 6: Wait for business account page to fully load
-    await businessAccountPage.waitForPageLoad();
+    // Act - Step 6: Wait for business dashboard page to fully load
+    await dashboardPage.waitForPageLoad();
 
     // Assert - Step 6a: Verify that page URL is https://staging.nocowboys.co.nz/business
     await expect(page).toHaveURL(/.*\/business/);
 
     // Assert - Step 6b: Verify that business name is displayed and matches BUSINESS_LOGIN_TEST_BUSINESS_NAME
-    const actualBusinessName = await businessAccountPage.getBusinessName();
+    const actualBusinessName = await dashboardPage.getBusinessName();
     expect(actualBusinessName).toBeTruthy();
     expect(actualBusinessName?.trim()).toBe(expectedBusinessName.trim());
 
     // Assert - Step 6c: Verify that Dashboard tab is displayed
-    const isDashboardTabVisible = await businessAccountPage.isDashboardTabVisible();
+    const isDashboardTabVisible = await dashboardPage.isDashboardTabVisible();
     expect(isDashboardTabVisible).toBe(true);
   });
 });

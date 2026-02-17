@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { LoginPage } from '../pages/LoginPage';
-import { BusinessAccountPage } from '../pages/BusinessAccountPage';
+import { BusinessDashboardPage } from '../pages/BusinessDashboardPage';
+import { BusinessDashboardJobsPage } from '../pages/BusinessDashboardJobsPage';
 import { JobsPage } from '../pages/JobsPage';
 import { RecentJobsPage } from '../pages/RecentJobsPage';
 
@@ -36,7 +37,8 @@ test.describe('NCB-27 Business filters jobs on the "Recent Jobs" page', () => {
     // Arrange
     const homePage = new HomePage(page);
     const loginPage = new LoginPage(page);
-    const businessAccountPage = new BusinessAccountPage(page);
+    const dashboardPage = new BusinessDashboardPage(page);
+    const businessDashboardJobsPage = new BusinessDashboardJobsPage(page);
     const jobsPage = new JobsPage(page);
     const recentJobsPage = new RecentJobsPage(page);
 
@@ -68,22 +70,22 @@ test.describe('NCB-27 Business filters jobs on the "Recent Jobs" page', () => {
       loginPage.clickLoginSubmit(),
     ]);
 
-    await businessAccountPage.waitForPageLoad();
+    await dashboardPage.waitForPageLoad();
 
     // Assert - Step 6: Business dashboard is open and business name is displayed
     await expect(page).toHaveURL(/.*\/business/);
 
-    const actualBusinessName = await businessAccountPage.getBusinessName();
+    const actualBusinessName = await dashboardPage.getBusinessName();
     expect(actualBusinessName).toBeTruthy();
     expect(actualBusinessName?.trim()).toBe(expectedBusinessName.trim());
 
     // Act - Step 7: Click dashboard tab "Jobs"
-    await businessAccountPage.clickJobsTab();
+    await dashboardPage.clickJobsTab();
     await page.waitForTimeout(500);
 
-    // Act - Step 8: Wait for Jobs section to load, then click on "Open" sub-tab
-    await businessAccountPage.waitForJobsSection();
-    await businessAccountPage.clickJobsSubTab('Open');
+    // Act - Step 8: Wait for Jobs page to load, then click on "Open" sub-tab
+    await businessDashboardJobsPage.waitForPage();
+    await businessDashboardJobsPage.clickJobsSubTab('Open');
 
     // Act - Step 9: Wait for navigation to /new/jobs page
     await jobsPage.waitForPageLoad();
