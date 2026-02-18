@@ -81,8 +81,9 @@ test.describe('Customer Searches For Businesses By Category And Location', () =>
 
     // Act – Step 8: Клікнути кнопку "Find a business" – з'являються поля категорії та локації
     await homePage.clickFindABusiness();
-    await page.waitForTimeout(500);
     await homePage.waitForFindBusinessPanel();
+    // Assert – Step 8: Verify panel is visible/attached
+    await expect(homePage.findBusinessPanel).toBeAttached();
 
     // Act – Step 9: Ввести "Academic" у поле "Help me find"
     await homePage.typeCategory(categorySearch);

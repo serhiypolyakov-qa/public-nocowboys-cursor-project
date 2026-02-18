@@ -149,11 +149,15 @@ export class HomePage {
    */
   async clickFindABusiness(): Promise<void> {
     await this.findABusinessBox.scrollIntoViewIfNeeded();
+    await this.findABusinessBox.waitFor({ state: 'visible', timeout: 10000 });
     await this.findABusinessBox.click();
+    // Wait for panel to appear after click
+    await this.findBusinessPanel.waitFor({ state: 'attached', timeout: 10000 });
   }
 
   /**
    * Дочекатися появу полів категорії та локації після кліку на "Find a business".
+   * Чекаємо прив'язку поля до DOM (панель/input можуть бути "hidden" через CSS/Selectize).
    */
   async waitForFindBusinessPanel(): Promise<void> {
     await this.categorySelectizeInput.waitFor({ state: 'attached', timeout: 15000 });
@@ -161,8 +165,16 @@ export class HomePage {
 
   /**
    * Ввести категорію в поле "Help me find" (відкриває випадаючий список категорій).
+   * Чекаємо прив'язку елемента до DOM (може бути "hidden" через Selectize), скролимо у видиму зону, клік з force.
    */
   async typeCategory(text: string): Promise<void> {
+    // Wait for panel to be attached first
+    await this.findBusinessPanel.waitFor({ state: 'attached', timeout: 15000 });
+    // Wait for input to be attached
+    await this.categorySelectizeInput.waitFor({ state: 'attached', timeout: 10000 });
+    // Try to scroll panel into view first, then the input
+    await this.findBusinessPanel.scrollIntoViewIfNeeded();
+    await this.page.waitForTimeout(500); // Small delay for animation
     await this.categorySelectizeInput.click({ force: true });
     await this.categorySelectizeInput.fill(text);
   }
