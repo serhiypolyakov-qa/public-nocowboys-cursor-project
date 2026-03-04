@@ -1,0 +1,216 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e5]:
+      - generic [ref=e7]:
+        - text: The
+        - strong [ref=e8]: Original Kiwi Rating Site
+      - generic [ref=e10]:
+        - text: Now with
+        - strong [ref=e11]: 139,469
+        - text: ratings online
+    - navigation [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - link "." [ref=e15] [cursor=pointer]:
+            - /url: /
+            - img [ref=e16]
+            - img [ref=e20]
+            - generic [ref=e39]: .
+          - generic [ref=e40]: Find Kiwi Tradies & Businesses.
+          - text:  
+        - list [ref=e42]:
+          - listitem [ref=e43]:
+            - link "How it Works" [ref=e44] [cursor=pointer]:
+              - /url: /everyone
+          - listitem [ref=e45]:
+            - link "For Businesses" [ref=e46] [cursor=pointer]:
+              - /url: /businesses
+          - listitem [ref=e47]:
+            - link "Jobs" [ref=e48] [cursor=pointer]:
+              - /url: /new/jobs
+          - listitem [ref=e49]:
+            - link "Blog" [ref=e50] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e51]:
+            - link "Info-zone" [ref=e52] [cursor=pointer]:
+              - /url: /info-zone
+          - listitem [ref=e53]:
+            - link "Bruno F." [ref=e54] [cursor=pointer]:
+              - /url: /customers/account
+              - strong [ref=e55]: Bruno F.
+          - listitem [ref=e56]:
+            - link "" [ref=e57] [cursor=pointer]:
+              - /url: "#"
+  - generic [ref=e63]:
+    - generic [ref=e64] [cursor=pointer]:
+      - heading "Find a business" [level=3] [ref=e65]
+      - paragraph [ref=e66]: Find tradespeople and businesses for all kind of projects. What are you looking for?
+      - generic [ref=e67]: →
+    - generic [ref=e68] [cursor=pointer]:
+      - heading "Review a business" [level=3] [ref=e69]
+      - paragraph [ref=e70]: Whether it was a good experience or the opposite, leave a rating for a business you've used.
+      - generic [ref=e71]: →
+  - generic [ref=e73]:
+    - heading "NoCowboys makes finding Kiwi tradies (and other businesses) simple." [level=2] [ref=e76]
+    - generic [ref=e77]:
+      - link "Search by business name Click here to search by business name so you can read reviews or leave reviews." [ref=e79] [cursor=pointer]:
+        - /url: "#header-search-container-open"
+        - generic [ref=e82]:
+          - heading "Search by business name" [level=3] [ref=e83]
+          - paragraph [ref=e84]: Click here to search by business name so you can read reviews or leave reviews.
+      - generic [ref=e89]:
+        - heading "Assess" [level=3] [ref=e90]
+        - paragraph [ref=e91]: Read feedback to make a decision. Our ratings system is fair and balanced so you get quality intel.
+      - generic [ref=e96]:
+        - heading "Contact & Negotiate" [level=3] [ref=e97]
+        - paragraph [ref=e98]: When you're ready to contact, swap info and get the job done.
+      - generic [ref=e103]:
+        - heading "Pay it Forward" [level=3] [ref=e104]
+        - paragraph [ref=e105]: When the job's over, pay it forward by coming back to leave a review.
+    - generic [ref=e106]:
+      - generic [ref=e108]:
+        - strong [ref=e111]: Business owner?
+        - text: NoCowboys can help market your reputation and grow your business.
+        - link "Find out more." [ref=e112] [cursor=pointer]:
+          - /url: /businesses
+      - generic [ref=e114]:
+        - strong [ref=e117]: Got a job needs doing?
+        - text: Post it here and let businesses quote for the work. Easy and free.
+        - link "Find out more." [ref=e118] [cursor=pointer]:
+          - /url: /new/jobs
+    - heading "Popular Categories" [level=2] [ref=e121]
+    - generic [ref=e122]:
+      - generic [ref=e123]:
+        - link [ref=e124] [cursor=pointer]:
+          - /url: /search/new-zealand/builders
+        - link "Builders & Renovators" [ref=e126] [cursor=pointer]:
+          - /url: /search/new-zealand/builders
+          - generic [ref=e127]: Builders & Renovators
+      - generic [ref=e128]:
+        - link [ref=e129] [cursor=pointer]:
+          - /url: /search/new-zealand/handyman-services
+        - link "Handymen" [ref=e131] [cursor=pointer]:
+          - /url: /search/new-zealand/handyman-services
+          - generic [ref=e132]: Handymen
+      - generic [ref=e133]:
+        - link [ref=e134] [cursor=pointer]:
+          - /url: /search/new-zealand/painters-painting-contractors
+        - link "Painters & Decorators" [ref=e136] [cursor=pointer]:
+          - /url: /search/new-zealand/painters-painting-contractors
+          - generic [ref=e137]: Painters & Decorators
+      - generic [ref=e138]:
+        - link [ref=e139] [cursor=pointer]:
+          - /url: /search/new-zealand/plumbers-plumbing-contractors
+        - link "Plumbers" [ref=e141] [cursor=pointer]:
+          - /url: /search/new-zealand/plumbers-plumbing-contractors
+          - generic [ref=e142]: Plumbers
+      - generic [ref=e143]:
+        - link [ref=e144] [cursor=pointer]:
+          - /url: /search/new-zealand/bathroom-remodelers
+        - link "Bathroom Remodeling" [ref=e146] [cursor=pointer]:
+          - /url: /search/new-zealand/bathroom-remodelers
+          - generic [ref=e147]: Bathroom Remodeling
+      - generic [ref=e148]:
+        - link [ref=e149] [cursor=pointer]:
+          - /url: /search/new-zealand/decks-decking
+        - link "Deck Construction" [ref=e151] [cursor=pointer]:
+          - /url: /search/new-zealand/decks-decking
+          - generic [ref=e152]: Deck Construction
+      - generic [ref=e153]:
+        - link [ref=e154] [cursor=pointer]:
+          - /url: /search/new-zealand/garden-services
+        - link "Gardening Services" [ref=e156] [cursor=pointer]:
+          - /url: /search/new-zealand/garden-services
+          - generic [ref=e157]: Gardening Services
+      - generic [ref=e158]:
+        - link [ref=e159] [cursor=pointer]:
+          - /url: /search/new-zealand/fencing-contractors
+        - link "Fence Construction" [ref=e161] [cursor=pointer]:
+          - /url: /search/new-zealand/fencing-contractors
+          - generic [ref=e162]: Fence Construction
+  - contentinfo [ref=e163]:
+    - generic [ref=e164]:
+      - generic [ref=e165]:
+        - strong [ref=e167]: Website
+        - list [ref=e169]:
+          - listitem [ref=e170]:
+            - link "Home" [ref=e171] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e172]:
+            - link "How it Works" [ref=e173] [cursor=pointer]:
+              - /url: /everyone
+          - listitem [ref=e174]:
+            - link "For Businesses" [ref=e175] [cursor=pointer]:
+              - /url: /businesses
+          - listitem [ref=e176]:
+            - link "Jobs" [ref=e177] [cursor=pointer]:
+              - /url: /new/jobs
+          - listitem [ref=e178]:
+            - link "FAQs" [ref=e179] [cursor=pointer]:
+              - /url: /faq
+          - listitem [ref=e180]:
+            - link "Blog" [ref=e181] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e182]:
+            - link "Login" [ref=e183] [cursor=pointer]:
+              - /url: /login
+          - listitem [ref=e184]:
+            - link "NC Websites" [ref=e185] [cursor=pointer]:
+              - /url: /nc-websites
+      - generic [ref=e186]:
+        - strong [ref=e188]: Ratings
+        - list [ref=e190]:
+          - listitem [ref=e191]:
+            - link "Find a Tradie/Business" [ref=e192] [cursor=pointer]:
+              - /url: /#
+          - listitem [ref=e193]:
+            - link "Most Recent Ratings" [ref=e194] [cursor=pointer]:
+              - /url: /recent-ratings
+          - listitem [ref=e195]:
+            - link "Browse All Categories" [ref=e196] [cursor=pointer]:
+              - /url: /category-list
+      - generic [ref=e197]:
+        - strong [ref=e199]: Company
+        - list [ref=e201]:
+          - listitem [ref=e202]:
+            - link "About" [ref=e203] [cursor=pointer]:
+              - /url: /about-us
+          - listitem [ref=e204]:
+            - link "What's in it for Businesses" [ref=e205] [cursor=pointer]:
+              - /url: /why-register
+          - listitem [ref=e206]:
+            - link "Feedback" [ref=e207] [cursor=pointer]:
+              - /url: /contact-us/send-message
+          - listitem [ref=e208]:
+            - link "Contact" [ref=e209] [cursor=pointer]:
+              - /url: /contact-us
+          - listitem [ref=e210]:
+            - link "Testimonials" [ref=e211] [cursor=pointer]:
+              - /url: /testimonials
+          - listitem [ref=e212]:
+            - link "NoCowboys Perks" [ref=e213] [cursor=pointer]:
+              - /url: https://www.nocowboys-perks.co.nz/
+      - generic [ref=e214]:
+        - strong [ref=e216]: Social
+        - list [ref=e218]:
+          - listitem [ref=e219]:
+            - link "Facebook" [ref=e220] [cursor=pointer]:
+              - /url: http://www.facebook.com/NoCowboysTradieReviews
+          - listitem [ref=e221]:
+            - link "Twitter" [ref=e222] [cursor=pointer]:
+              - /url: http://twitter.com/nocowboys
+          - listitem [ref=e223]:
+            - link "Instagram" [ref=e224] [cursor=pointer]:
+              - /url: https://www.instagram.com/nocowboys
+      - generic [ref=e226]:
+        - paragraph [ref=e227]:
+          - text: All content copyright ©2006-2026, NoCowboys Limited. Read our
+          - link "Terms and Conditions" [ref=e228] [cursor=pointer]:
+            - /url: /terms-conditions
+          - text: .
+        - paragraph [ref=e229]: NoCowboys v.3.0.2098
+  - status
+```

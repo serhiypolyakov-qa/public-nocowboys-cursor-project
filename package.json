@@ -8,7 +8,9 @@
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "allure:generate": "allure generate ./allure-results --clean",
+    "allure:open": "allure open ./allure-report"
   },
   "keywords": [
     "playwright",
@@ -22,6 +24,8 @@
   "devDependencies": {
     "@playwright/test": "^1.40.0",
     "@types/node": "^20.0.0",
+    "allure-commandline": "^2.37.0",
+    "allure-playwright": "^3.5.0",
     "dotenv": "^17.2.3",
     "typescript": "^5.0.0"
   }
