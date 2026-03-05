@@ -8,7 +8,13 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    env:
+      CUSTOMER_LOGIN_TEST_LOGIN: ${{ secrets.CUSTOMER_LOGIN_TEST_LOGIN }}
+      CUSTOMER_LOGIN_TEST_PASSWORD: ${{ secrets.CUSTOMER_LOGIN_TEST_PASSWORD }}
+      CUSTOMER_LOGIN_TEST_FULL_NAME: ${{ secrets.CUSTOMER_LOGIN_TEST_FULL_NAME }}
+      BUSINESS_LOGIN_TEST_LOGIN: ${{ secrets.BUSINESS_LOGIN_TEST_LOGIN }}
+      BUSINESS_LOGIN_TEST_PASSWORD: ${{ secrets.BUSINESS_LOGIN_TEST_PASSWORD }}
+      BUSINESS_LOGIN_TEST_FULL_NAME: ${{ secrets.BUSINESS_LOGIN_TEST_FULL_NAME }}
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
