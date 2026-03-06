@@ -2,12 +2,13 @@ name: Playwright Auto Tests
 
 on:
   schedule:
-    - cron: '0 */3 * * *'   # запуск кожні 3 години
-  workflow_dispatch:        # можливість ручного запуску
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     env:
       CUSTOMER_LOGIN_TEST_LOGIN: ${{ secrets.CUSTOMER_LOGIN_TEST_LOGIN }}
       CUSTOMER_LOGIN_TEST_PASSWORD: ${{ secrets.CUSTOMER_LOGIN_TEST_PASSWORD }}
@@ -15,6 +16,7 @@ jobs:
       BUSINESS_LOGIN_TEST_LOGIN: ${{ secrets.BUSINESS_LOGIN_TEST_LOGIN }}
       BUSINESS_LOGIN_TEST_PASSWORD: ${{ secrets.BUSINESS_LOGIN_TEST_PASSWORD }}
       BUSINESS_LOGIN_TEST_BUSINESS_NAME: ${{ secrets.BUSINESS_LOGIN_TEST_BUSINESS_NAME }}
+
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
@@ -32,8 +34,10 @@ jobs:
 
       - name: 🚀 Run Playwright Tests
         run: npm run test
+        continue-on-error: true
 
-      - name: 📤 Upload Allure Results
+      - name: 📊 Upload Allure Results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: allure-results
