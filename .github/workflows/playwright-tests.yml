@@ -18,10 +18,11 @@ jobs:
       BUSINESS_LOGIN_TEST_BUSINESS_NAME: ${{ secrets.BUSINESS_LOGIN_TEST_BUSINESS_NAME }}
 
     steps:
+
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js
+      - name: 🟢 Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -36,9 +37,32 @@ jobs:
         run: npm run test
         continue-on-error: true
 
-      - name: 📊 Upload Allure Results
+      - name: 📦 Install Allure CLI
         if: always()
-        uses: actions/upload-artifact@v4
+        run: npm install -g allure-commandline
+
+      - name: 📥 Checkout gh-pages branch
+        if: always()
+        uses: actions/checkout@v4
         with:
-          name: allure-results
-          path: allure-results
+          ref: gh-pages
+          path: gh-pages
+        continue-on-error: true
+
+      - name: 📊 Copy history
+        if: always()
+        run: |
+          mkdir -p allure-results/history
+          cp -r gh-pages/history allure-results || true
+
+      - name: 📈 Generate Allure Report
+        if: always()
+        run: |
+          allure generate allure-results --clean -o allure-report
+
+      - name: 🚀 Deploy report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
