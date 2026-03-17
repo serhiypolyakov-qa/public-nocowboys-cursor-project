@@ -1,0 +1,144 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e5]:
+      - generic [ref=e7]:
+        - text: The
+        - strong [ref=e8]: Original Kiwi Rating Site
+      - generic [ref=e10]:
+        - text: Now with
+        - strong [ref=e11]: 139,469
+        - text: ratings online
+    - navigation [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - link "." [ref=e15] [cursor=pointer]:
+            - /url: /
+            - img [ref=e16]
+            - img [ref=e20]
+            - generic [ref=e39]: .
+          - generic [ref=e40]: Find Kiwi Tradies & Businesses.
+          - text:  
+        - list [ref=e42]:
+          - listitem [ref=e43]:
+            - link "How it Works" [ref=e44] [cursor=pointer]:
+              - /url: /new/everyone
+          - listitem [ref=e45]:
+            - link "For Businesses" [ref=e46] [cursor=pointer]:
+              - /url: /new/businesses
+          - listitem [ref=e47]:
+            - link "Jobs" [ref=e48] [cursor=pointer]:
+              - /url: /new/jobs
+          - listitem [ref=e49]:
+            - link "Blog" [ref=e50] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e51]:
+            - link "Info-zone" [ref=e52] [cursor=pointer]:
+              - /url: /info-zone
+          - listitem [ref=e53]:
+            - link "Log In" [ref=e54] [cursor=pointer]:
+              - /url: /login
+            - link "Creating an Account Video" [ref=e55] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e56]: 
+          - listitem [ref=e57]:
+            - link "" [ref=e58] [cursor=pointer]:
+              - /url: "#"
+  - generic [ref=e60]:
+    - heading "Nocowboys email log" [level=1] [ref=e61]
+    - paragraph [ref=e62]:
+      - strong [ref=e63]: "Log location:"
+      - text: "/home/nocowboys/staging/releases/35/httpdocs/new/application/../../../tmp/emails (exists: 1)"
+      - strong [ref=e64]: "Log enabled (real emails will not be sent):"
+      - text: "1"
+    - heading "Remember, if you reload this page you'll lose the emails, so check them out now." [level=3] [ref=e65]
+    - link "serhiy.polyakov%2Badmin%40greenice.net-ZendMail_2026-03-18_10-46-25_69b9cbb13997e-new-customer-added.html" [ref=e66] [cursor=pointer]:
+      - /url: /development/view-email?file=serhiy.polyakov%252Badmin%2540greenice.net-ZendMail_2026-03-18_10-46-25_69b9cbb13997e-new-customer-added.html
+    - link "serhiy.polyakov%2Bcoursor17737839632448587%40greenice.net-ZendMail_2026-03-18_10-46-25_69b9cbb1393bd-validate-your-email.html" [ref=e67] [cursor=pointer]:
+      - /url: /development/view-email?file=serhiy.polyakov%252Bcoursor17737839632448587%2540greenice.net-ZendMail_2026-03-18_10-46-25_69b9cbb1393bd-validate-your-email.html
+    - paragraph [ref=e68]
+  - contentinfo [ref=e69]:
+    - generic [ref=e70]:
+      - generic [ref=e71]:
+        - strong [ref=e73]: Website
+        - list [ref=e75]:
+          - listitem [ref=e76]:
+            - link "Home" [ref=e77] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e78]:
+            - link "How it Works" [ref=e79] [cursor=pointer]:
+              - /url: /new/everyone
+          - listitem [ref=e80]:
+            - link "For Businesses" [ref=e81] [cursor=pointer]:
+              - /url: /new/businesses
+          - listitem [ref=e82]:
+            - link "Jobs" [ref=e83] [cursor=pointer]:
+              - /url: /new/jobs
+          - listitem [ref=e84]:
+            - link "FAQs" [ref=e85] [cursor=pointer]:
+              - /url: /new/faq
+          - listitem [ref=e86]:
+            - link "Blog" [ref=e87] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e88]:
+            - link "Login" [ref=e89] [cursor=pointer]:
+              - /url: /login
+          - listitem [ref=e90]:
+            - link "NC Websites" [ref=e91] [cursor=pointer]:
+              - /url: /nc-websites
+      - generic [ref=e92]:
+        - strong [ref=e94]: Ratings
+        - list [ref=e96]:
+          - listitem [ref=e97]:
+            - link "Find a Tradie/Business" [ref=e98] [cursor=pointer]:
+              - /url: /#
+          - listitem [ref=e99]:
+            - link "Most Recent Ratings" [ref=e100] [cursor=pointer]:
+              - /url: /new/recent-ratings
+          - listitem [ref=e101]:
+            - link "Browse All Categories" [ref=e102] [cursor=pointer]:
+              - /url: /new/category-list
+      - generic [ref=e103]:
+        - strong [ref=e105]: Company
+        - list [ref=e107]:
+          - listitem [ref=e108]:
+            - link "About" [ref=e109] [cursor=pointer]:
+              - /url: /new/about-us
+          - listitem [ref=e110]:
+            - link "What's in it for Businesses" [ref=e111] [cursor=pointer]:
+              - /url: /new/why-register
+          - listitem [ref=e112]:
+            - link "Feedback" [ref=e113] [cursor=pointer]:
+              - /url: /new/contact-us/send-message
+          - listitem [ref=e114]:
+            - link "Contact" [ref=e115] [cursor=pointer]:
+              - /url: /new/contact-us
+          - listitem [ref=e116]:
+            - link "Testimonials" [ref=e117] [cursor=pointer]:
+              - /url: /new/testimonials
+          - listitem [ref=e118]:
+            - link "NoCowboys Perks" [ref=e119] [cursor=pointer]:
+              - /url: https://www.nocowboys-perks.co.nz/
+      - generic [ref=e120]:
+        - strong [ref=e122]: Social
+        - list [ref=e124]:
+          - listitem [ref=e125]:
+            - link "Facebook" [ref=e126] [cursor=pointer]:
+              - /url: http://www.facebook.com/NoCowboysTradieReviews
+          - listitem [ref=e127]:
+            - link "Twitter" [ref=e128] [cursor=pointer]:
+              - /url: http://twitter.com/nocowboys
+          - listitem [ref=e129]:
+            - link "Instagram" [ref=e130] [cursor=pointer]:
+              - /url: https://www.instagram.com/nocowboys
+      - generic [ref=e132]:
+        - paragraph [ref=e133]:
+          - text: All content copyright ©2006-2026, NoCowboys Limited. Read our
+          - link "Terms and Conditions" [ref=e134] [cursor=pointer]:
+            - /url: /terms-conditions
+          - text: .
+        - paragraph [ref=e135]: NoCowboys v.3.0.2098
+  - status
+```
