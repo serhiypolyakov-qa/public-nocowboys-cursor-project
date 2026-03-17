@@ -1,8 +1,0 @@
-
-========================================
-✅ Business Registration Test Completed Successfully!
-========================================
-📋 Business Name: CursorTestBusiness8205
-📧 Business Email: cursor-test-business50648@greenice.net
-========================================
-
