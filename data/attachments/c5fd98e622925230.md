@@ -1,0 +1,210 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e5]:
+      - generic [ref=e7]:
+        - text: The
+        - strong [ref=e8]: Original Kiwi Rating Site
+      - generic [ref=e10]:
+        - text: Now with
+        - strong [ref=e11]: 139,469
+        - text: ratings online
+    - navigation [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - link "." [ref=e15] [cursor=pointer]:
+            - /url: /
+            - img [ref=e16]
+            - img [ref=e20]
+            - generic [ref=e39]: .
+          - generic [ref=e40]: Find Kiwi Tradies & Businesses.
+          - text:  
+        - list [ref=e42]:
+          - listitem [ref=e43]:
+            - link "How it Works" [ref=e44] [cursor=pointer]:
+              - /url: /everyone
+          - listitem [ref=e45]:
+            - link "For Businesses" [ref=e46] [cursor=pointer]:
+              - /url: /businesses
+          - listitem [ref=e47]:
+            - link "Jobs" [ref=e48] [cursor=pointer]:
+              - /url: /new/jobs
+          - listitem [ref=e49]:
+            - link "Blog" [ref=e50] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e51]:
+            - link "Info-zone" [ref=e52] [cursor=pointer]:
+              - /url: /info-zone
+          - listitem [ref=e53]:
+            - link "Bruno F." [ref=e54] [cursor=pointer]:
+              - /url: /customers/account
+              - strong [ref=e55]: Bruno F.
+          - listitem [ref=e56]:
+            - link "" [ref=e57] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=e58]:
+      - link "NoCowboys" [ref=e60] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e61]: ›
+      - text: Searching for "Greenice Web Development"
+  - generic [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e66]:
+          - generic [ref=e67]: Search for the business you'd like to review.
+          - generic [ref=e68]:
+            - textbox "Type the business name here" [ref=e69]: Greenice Web Development
+            - button "Search" [ref=e70] [cursor=pointer]
+        - generic [ref=e71]:
+          - paragraph [ref=e72]:
+            - strong [ref=e73]: Greenice Web Development (1 results found)
+          - paragraph [ref=e74]: Review the results below and find the right business for you.
+      - generic [ref=e75]:
+        - list [ref=e77]:
+          - listitem [ref=e78]:
+            - heading "Greenice Web Development" [level=3] [ref=e80]:
+              - link "Greenice Web Development" [ref=e81] [cursor=pointer]:
+                - /url: /businesses/greenice-web-development/rate?utm_source=nc_search
+            - generic [ref=e89]:
+              - generic [ref=e90]:
+                - generic [ref=e91]:
+                  - generic [ref=e92]: 
+                  - generic [ref=e93]: 
+                  - generic [ref=e94]: 
+                  - generic [ref=e95]: 
+                  - generic [ref=e96]: 
+                - generic [ref=e97]:
+                  - text: 98.8% from 4 ratings –
+                  - generic [ref=e98]: Located in Martinborough – Academic
+              - generic [ref=e99]: "\"Good service. Thanks\""
+        - generic [ref=e100]:
+          - heading "Customer preferred businesses" [level=6] [ref=e101]
+          - list [ref=e102]:
+            - listitem [ref=e103]:
+              - heading "CCTV Drain Inspections" [level=3] [ref=e105]:
+                - link "CCTV Drain Inspections" [ref=e106] [cursor=pointer]:
+                  - /url: /businesses/cctv-drain-inspections/rate?utm_source=nc_search
+              - generic [ref=e108]:
+                - generic [ref=e109]:
+                  - generic [ref=e110]: 
+                  - generic [ref=e111]: 
+                  - generic [ref=e112]: 
+                  - generic [ref=e113]: 
+                  - generic [ref=e114]: 
+                - generic [ref=e115]:
+                  - text: 97.8% from 28 ratings
+                  - generic [ref=e116]: Located in Mt Albert – Drain Unblocking
+      - generic [ref=e117]:
+        - generic [ref=e118]: ‹‹ Previous
+        - text: "| 1 |"
+        - generic [ref=e119]: Next ››
+        - generic [ref=e120]: Showing one item on one page
+        - generic [ref=e121]:
+          - text: Display 10 |
+          - link "20" [ref=e122] [cursor=pointer]:
+            - /url: /review-a-business/Greenice+Web+Development?per-page=20
+          - text: "|"
+          - link "50" [ref=e123] [cursor=pointer]:
+            - /url: /review-a-business/Greenice+Web+Development?per-page=50
+          - text: "|"
+          - link "100" [ref=e124] [cursor=pointer]:
+            - /url: /review-a-business/Greenice+Web+Development?per-page=100
+          - text: results per page
+      - generic [ref=e125]:
+        - text: Can't find the business you want to rate?
+        - link "Add it here…" [ref=e126] [cursor=pointer]:
+          - /url: /add-business
+      - generic [ref=e127]:
+        - text: Are you a tradesperson or a business that isn't listed?
+        - link "Add your business here…" [ref=e128] [cursor=pointer]:
+          - /url: /register/business
+    - paragraph [ref=e129]:
+      - generic [ref=e130]:
+        - text: Found something that doesn't make sense? Search not working properly?
+        - link "Let us know! We like to learn!" [ref=e131] [cursor=pointer]:
+          - /url: /contact-us/send-message?type=search
+  - contentinfo [ref=e132]:
+    - generic [ref=e133]:
+      - generic [ref=e134]:
+        - strong [ref=e136]: Website
+        - list [ref=e138]:
+          - listitem [ref=e139]:
+            - link "Home" [ref=e140] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e141]:
+            - link "How it Works" [ref=e142] [cursor=pointer]:
+              - /url: /everyone
+          - listitem [ref=e143]:
+            - link "For Businesses" [ref=e144] [cursor=pointer]:
+              - /url: /businesses
+          - listitem [ref=e145]:
+            - link "Jobs" [ref=e146] [cursor=pointer]:
+              - /url: /new/jobs
+          - listitem [ref=e147]:
+            - link "FAQs" [ref=e148] [cursor=pointer]:
+              - /url: /faq
+          - listitem [ref=e149]:
+            - link "Blog" [ref=e150] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e151]:
+            - link "Login" [ref=e152] [cursor=pointer]:
+              - /url: /login
+          - listitem [ref=e153]:
+            - link "NC Websites" [ref=e154] [cursor=pointer]:
+              - /url: /nc-websites
+      - generic [ref=e155]:
+        - strong [ref=e157]: Ratings
+        - list [ref=e159]:
+          - listitem [ref=e160]:
+            - link "Find a Tradie/Business" [ref=e161] [cursor=pointer]:
+              - /url: /#
+          - listitem [ref=e162]:
+            - link "Most Recent Ratings" [ref=e163] [cursor=pointer]:
+              - /url: /recent-ratings
+          - listitem [ref=e164]:
+            - link "Browse All Categories" [ref=e165] [cursor=pointer]:
+              - /url: /category-list
+      - generic [ref=e166]:
+        - strong [ref=e168]: Company
+        - list [ref=e170]:
+          - listitem [ref=e171]:
+            - link "About" [ref=e172] [cursor=pointer]:
+              - /url: /about-us
+          - listitem [ref=e173]:
+            - link "What's in it for Businesses" [ref=e174] [cursor=pointer]:
+              - /url: /why-register
+          - listitem [ref=e175]:
+            - link "Feedback" [ref=e176] [cursor=pointer]:
+              - /url: /contact-us/send-message
+          - listitem [ref=e177]:
+            - link "Contact" [ref=e178] [cursor=pointer]:
+              - /url: /contact-us
+          - listitem [ref=e179]:
+            - link "Testimonials" [ref=e180] [cursor=pointer]:
+              - /url: /testimonials
+          - listitem [ref=e181]:
+            - link "NoCowboys Perks" [ref=e182] [cursor=pointer]:
+              - /url: https://www.nocowboys-perks.co.nz/
+      - generic [ref=e183]:
+        - strong [ref=e185]: Social
+        - list [ref=e187]:
+          - listitem [ref=e188]:
+            - link "Facebook" [ref=e189] [cursor=pointer]:
+              - /url: http://www.facebook.com/NoCowboysTradieReviews
+          - listitem [ref=e190]:
+            - link "Twitter" [ref=e191] [cursor=pointer]:
+              - /url: http://twitter.com/nocowboys
+          - listitem [ref=e192]:
+            - link "Instagram" [ref=e193] [cursor=pointer]:
+              - /url: https://www.instagram.com/nocowboys
+      - generic [ref=e195]:
+        - paragraph [ref=e196]:
+          - text: All content copyright ©2006-2026, NoCowboys Limited. Read our
+          - link "Terms and Conditions" [ref=e197] [cursor=pointer]:
+            - /url: /terms-conditions
+          - text: .
+        - paragraph [ref=e198]: NoCowboys v.3.0.2098
+  - status
+```
